@@ -1,23 +1,18 @@
-// 공홈의 예제
-
-//express로드 , 이를 통해 express모듈을 제어한다.
-const express = require("express");
-//express()가 application함수를 로드한다. 그것을 app변수에 선언하여 어플리케이션을 만든다.
+const express = require('express');
 const app = express();
-//포트 지정
-const port = 3000;
 
-//middleware이다.
-//client가 "/"경로에 get 요청을 보내면
-//req는 요청객체, res는 응답객체 이다.
-app.get("/", (req, res) => {
-  //응답 콜백 함수
-  //"Hello World"를 보내 화면에 출력한다.
-  res.send("Hello World!");
-});
+const indexRouter = require('./routes/index');
+const userRouter = require('./routes/users');
 
-//middleware
-//port에 접속 성공하면 콜백 함수를 실행시킨다.
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+
+app.use('/', indexRouter);
+app.use('/user', userRouter);
+
+
+app.use(express.static('public'));
+app.set('view engine', 'ejs');
+
+
+app.listen(3000, (err) => {
+    console.log("The server is listening on port 3000");
 });
