@@ -1,3 +1,5 @@
+//make json file of ISHS students' number
+
 const fs = require("fs");
 let jsonList = new Array();
 
